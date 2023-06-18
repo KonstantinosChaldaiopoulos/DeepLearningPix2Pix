@@ -1,6 +1,7 @@
+import os
 from imports import *
 from utils import *
-from model import *
+from models import *
 from dataloader import *
 from training_function import*
 

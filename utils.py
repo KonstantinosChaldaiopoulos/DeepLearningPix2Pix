@@ -1,3 +1,5 @@
+import os
+
 def create_resized_copy(input_folder, output_folder, new_size):
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
@@ -18,20 +20,33 @@ def create_resized_copy(input_folder, output_folder, new_size):
                 img_resized = img.resize(new_size, Image.ANTIALIAS)
                 img_resized.save(output_file_path)
 
-def main():
+
+def get_image_files(folder):
+    image_files = {}
+    for root, _, files in os.walk(folder):
+        for file in files:
+            if file.lower().endswith(('.png', '.jpg', '.jpeg')):
+                image_files[file] = os.path.join(root, file)
+    return image_files
+
+def extract_number(filename):
+    num = re.findall(r'\d+', filename)
+    return int(num[0]) if num else None
+
+
+def resize(a,b):
     input_folder_a = '/content/drive/MyDrive/Pix2PixA'
     input_folder_b = '/content/drive/MyDrive/Pix2PixB'
     output_folder_a = '/content/drive/MyDrive/Pix2PixA_train'
     output_folder_b = '/content/drive/MyDrive/Pix2PixB_train'
-    new_size = (250, 140)
+    new_size = (a, b)
 
     create_resized_copy(input_folder_a, output_folder_a, new_size)
     create_resized_copy(input_folder_b, output_folder_b, new_size)
 
     print(f"Resized images saved in {output_folder_a} and {output_folder_b}")
 
-if __name__ == "__main__":
-    main()
+
 
 def weights_init(m):
     classname = m.__class__.__name__

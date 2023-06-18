@@ -1,3 +1,5 @@
+from imports import *
+from models import *
 transform = transforms.ToTensor()
 folder_path = '/content/drive/MyDrive/Pix2PixA_test'
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

@@ -1,3 +1,14 @@
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+from torch.autograd import Variable
+from torchvision import transforms
+from torch.utils.data import DataLoader
+import matplotlib.pyplot as plt
+import itertools
+from torchvision.transforms import Compose, Resize, ToTensor
+
 class UNetGenerator(nn.Module):
     def __init__(self, in_channels=3, out_channels=3, num_filters=128):
         super(UNetGenerator, self).__init__()
@@ -61,7 +72,7 @@ class UNetGenerator(nn.Module):
         return out
 
 class PatchGANDiscriminator(nn.Module):
-    def __init__(self, in_channels=6, num_filters=64):
+    def __init__(self, in_channels=6, num_filters=128):
         super(PatchGANDiscriminator, self).__init__()
 
         self.model = nn.Sequential(
