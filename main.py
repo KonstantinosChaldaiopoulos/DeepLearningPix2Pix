@@ -1,8 +1,8 @@
-from _imports import *
-from _utils import *
-from _model import *
-from _dataloader import *
-from _training_function import*
+from imports import *
+from utils import *
+from model import *
+from dataloader import *
+from training_function import*
 
 if __name__ == "__main__":
     data_path = "/content/drive/MyDrive"
