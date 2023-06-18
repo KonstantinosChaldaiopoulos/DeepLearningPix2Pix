@@ -45,4 +45,4 @@ def train_pix2pix(paired_loader,  epochs, lambda_L1=100):
 
         if epoch % 1 == 0:         
             torch.save(G.state_dict(), f"generator_{epoch}.pth")
-            torch.save(D.state_dict(), f"discriminator_{epoch}.pth")
+            
