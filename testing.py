@@ -1,5 +1,6 @@
 from imports import *
 from models import *
+import numpy as np
 
 transform = transforms.ToTensor()
 pix2pixA_folder_path = '/content/drive/MyDrive/Pix2PixA_test'
