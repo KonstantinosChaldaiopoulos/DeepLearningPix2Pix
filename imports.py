@@ -15,4 +15,3 @@ import os
 from PIL import Image
 import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
-from PIL import Image
