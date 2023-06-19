@@ -20,5 +20,5 @@ if __name__ == "__main__":
     paired_loader = DataLoader(paired_dataset, batch_size=1, shuffle=False, num_workers=16)
 
 
-    epochs = 20
+    epochs = 200
     train_pix2pix(paired_loader, epochs)
