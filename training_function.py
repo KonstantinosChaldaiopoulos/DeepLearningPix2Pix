@@ -13,7 +13,7 @@ def train_pix2pix(paired_loader, epochs, lambda_L1=100):
     G.apply(weights_init)
     D.apply(weights_init)
 
-    criterion_GAN = torch.nn.MSELoss().to(device)
+    criterion_GAN = torch.nn.BCEWithLogitsLoss().to(device)
     criterion_L1 = torch.nn.L1Loss().to(device)
 
     optimizer_G = torch.optim.Adam(G.parameters(), lr=0.00001, betas=(0.5, 0.999))
