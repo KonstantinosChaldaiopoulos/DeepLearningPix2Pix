@@ -72,7 +72,7 @@ class UNetGenerator(nn.Module):
         return out
 
 class PatchGANDiscriminator(nn.Module):
-    def __init__(self, in_channels=6, num_filters=128):
+    def __init__(self, in_channels=6, num_filters=64):
         super(PatchGANDiscriminator, self).__init__()
 
         self.model = nn.Sequential(
