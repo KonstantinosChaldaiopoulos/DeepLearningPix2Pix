@@ -14,7 +14,7 @@ class UNetGenerator(nn.Module):
         super(UNetGenerator, self).__init__()
 
 
-        self.enc1 = self.encoder_block(in_channels, num_filters, normalize=False)
+        self.enc1 = self.encoder_block(in_channels, num_filters, normalize=True)
         self.enc2 = self.encoder_block(num_filters, num_filters * 2)
         self.enc3 = self.encoder_block(num_filters * 2, num_filters * 4)
         self.enc4 = self.encoder_block(num_filters * 4, num_filters * 8)
