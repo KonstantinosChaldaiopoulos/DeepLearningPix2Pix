@@ -21,7 +21,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 G = UNetGenerator().to(device)
 
-model_path = 'generator_39.pth'
+model_path = 'generator_99.pth'
 G.load_state_dict(torch.load(model_path, map_location=device))
 
 total_nss_score = 0.0
