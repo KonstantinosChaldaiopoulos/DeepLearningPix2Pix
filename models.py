@@ -14,7 +14,7 @@ class UNetGenerator(nn.Module):
         super(UNetGenerator, self).__init__()
 
 
-        self.enc1 = self.encoder_block(in_channels, num_filters*2, normalize=True)
+        self.enc1 = self.encoder_block(in_channels, num_filters*2, normalize=False)
         self.enc2 = self.encoder_block(num_filters*2, num_filters * 4)
         self.enc3 = self.encoder_block(num_filters * 4, num_filters * 8)
         self.enc4 = self.encoder_block(num_filters * 8, num_filters * 16)
@@ -23,12 +23,11 @@ class UNetGenerator(nn.Module):
         self.bottleneck = nn.Sequential(
             nn.ConvTranspose2d(num_filters * 16, num_filters * 16, kernel_size=3, padding=1),
             nn.InstanceNorm2d(num_filters * 16),
-            nn.ReLU(inplace=True),
-            nn.Dropout(0.5)
+            nn.ReLU(inplace=True)
         )
 
-        self.dec4 = self.decoder_block(num_filters * 32, num_filters * 8, dropout = True)
-        self.dec3 = self.decoder_block(num_filters * 16, num_filters * 4, dropout = True)
+        self.dec4 = self.decoder_block(num_filters * 32, num_filters * 8)
+        self.dec3 = self.decoder_block(num_filters * 16, num_filters * 4)
         self.dec2 = self.decoder_block(num_filters * 8, num_filters*2)
         self.dec1 = nn.Sequential(
             nn.ConvTranspose2d(num_filters * 4, out_channels, kernel_size=4, stride=2, padding=1),
@@ -41,17 +40,13 @@ class UNetGenerator(nn.Module):
         layers.append(nn.LeakyReLU(0.2, inplace=True))
         return nn.Sequential(*layers)
 
-    def decoder_block(self, in_channels, out_channels, kernel_size=4, stride=2, padding=1, dropout=False):
-        layers = [
-            nn.ConvTranspose2d(in_channels, out_channels, kernel_size, stride, padding, bias=False),
-            nn.InstanceNorm2d(out_channels),
-            nn.ReLU(inplace=True)
-        ]
-
-        if dropout:
-            layers.append(nn.Dropout(0.5))
-
-        return nn.Sequential(*layers)
+    def decoder_block(self, in_channels, out_channels, kernel_size=4, stride=2, padding=1):
+      layers = [
+          nn.ConvTranspose2d(in_channels, out_channels, kernel_size, stride, padding, bias=False),
+          nn.InstanceNorm2d(out_channels),
+          nn.ReLU(inplace=True)
+      ]
+      return nn.Sequential(*layers)
 
     def forward(self, x):
 
