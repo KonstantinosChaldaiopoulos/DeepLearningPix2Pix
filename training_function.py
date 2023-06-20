@@ -55,19 +55,10 @@ def train_pix2pix(paired_loader, epochs, lambda_L1=100):
           
 
             if i % 500 == 0:
-                generator_losses.append(loss_G.item())
-                discriminator_losses.append(loss_D.item())
                 print(f"Epoch {epoch}, Batch {i}, Generator Loss: {loss_G.item()}, Discriminator Loss: {loss_D.item()}")
 
         if epoch % 1 == 0:
             torch.save(G.state_dict(), f"generator_{epoch}.pth")
 
-    plt.figure(figsize=(12, 12))
-    plt.semilogy(generator_losses, label='Generator Loss')
-    plt.plot(discriminator_losses, label='Discriminator Loss')
-    plt.xlabel('Iterations')
-    plt.ylabel('Loss')
-    plt.legend()
-    plt.gca().set_aspect('equal')  
-    plt.show()
+
             
