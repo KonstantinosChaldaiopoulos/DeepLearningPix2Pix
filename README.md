@@ -1,6 +1,5 @@
 # Pix2Pix GAN for Saliency Detection: An Investigation into Fixation Prediction.   
 A deep learning project for the MSc program in Democritus utilizing a pix2pix generative adversarial network and salient maps for fixation prediction.
-Student: Konstantinos Chaldaiopoulos - MTN2220
 
 ## Repository Structure
 Here are the main files in the repository and a brief explanation of their function:
@@ -51,3 +50,6 @@ If you run the code in google colab simply follow the instructions in the [prese
 The model performance was evaluated using the Normalized Scanpath Saliency (NSS) score, a standard measure in the field of visual attention. Our model achieved a promising NSS score of 1.41, which is close to the minimum human baseline of 1.54, signifying a good correlation between the predicted saliency map and the human fixation data. However, it is noteworthy that certain model architectures, such as [CEDNS](https://ieeexplore.ieee.org/document/8709735) , have achieved higher accuracies of 2.39 on the CAT2000 dataset. 
 
 
+Author
+
+Konstantinos Chaldaiopoulos - MTN2220
