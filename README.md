@@ -4,8 +4,6 @@ A deep learning project for the MSc program in Democritus utilizing a pix2pix ge
 ## Repository Structure
 Here are the main files in the repository and a brief explanation of their function:
 
-`Training-Testing-Files`: Contains files related to training and testing of the model.
-
 `Presentation.ipynb`: A Jupyter Notebook used for as an example of how you can execute the code.
 
 `Report.pdf`: A comprehensive report on the project.
