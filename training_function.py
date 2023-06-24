@@ -3,7 +3,8 @@ from models import *
 from utils import *
 import matplotlib.pyplot as plt
 import numpy as np
-
+import matplotlib.pyplot as plt
+import numpy as np
 def train_pix2pix(paired_loader, epochs, lambda_L1=100):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -31,9 +32,9 @@ def train_pix2pix(paired_loader, epochs, lambda_L1=100):
 
             fake_B = G(real_A)
 
+            # Generator loss
             pred_fake_B = D(torch.cat([real_A, fake_B], 1))
             loss_GAN = criterion_GAN(pred_fake_B, torch.ones_like(pred_fake_B))
-
             loss_L1 = criterion_L1(fake_B, real_B) * lambda_L1
 
             loss_G = loss_GAN + loss_L1
@@ -43,6 +44,7 @@ def train_pix2pix(paired_loader, epochs, lambda_L1=100):
 
             optimizer_D.zero_grad()
 
+            # Discriminator loss
             pred_real = D(torch.cat([real_A, real_B], 1))
             loss_D_real = criterion_GAN(pred_real, torch.ones_like(pred_real))
             pred_fake = D(torch.cat([real_A, fake_B.detach()], 1))
@@ -51,8 +53,6 @@ def train_pix2pix(paired_loader, epochs, lambda_L1=100):
 
             loss_D.backward()
             optimizer_D.step()
-
-          
 
             if i % 500 == 0:
                 print(f"Epoch {epoch}, Batch {i}, Generator Loss: {loss_G.item()}, Discriminator Loss: {loss_D.item()}")
