@@ -122,6 +122,6 @@ class PatchGANDiscriminator(nn.Module):
 
     def forward(self, x):
          
-          x = self.model(x)
+          out = self.model(x)
           
           return out
