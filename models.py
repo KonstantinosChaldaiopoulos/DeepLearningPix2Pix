@@ -10,7 +10,7 @@ import itertools
 from torchvision.transforms import Compose, Resize, ToTensor
 
 class UNetGenerator(nn.Module):
-    def __init__(self, in_channels=3, out_channels=3, num_filters=64, dropout_prob=0.5):
+    def __init__(self, in_channels=3, out_channels=3, num_filters=64):
         super(UNetGenerator, self).__init__()
 
         self.enc1 = self.encoder_block(in_channels, num_filters*2, normalize=False)
@@ -22,11 +22,11 @@ class UNetGenerator(nn.Module):
             nn.ConvTranspose2d(num_filters * 16, num_filters * 16, kernel_size=3, padding=1),
             nn.InstanceNorm2d(num_filters * 16),
             nn.LeakyReLU(0.2, inplace=True),
-            nn.Dropout(dropout_prob)
+            nn.Dropout(0.5)
         )
 
-        self.dec4 = self.decoder_block(num_filters * 32, num_filters * 8, dropout_prob)
-        self.dec3 = self.decoder_block(num_filters * 16, num_filters * 4, dropout_prob)
+        self.dec4 = self.decoder_block(num_filters * 32, num_filters * 8, 0.5)
+        self.dec3 = self.decoder_block(num_filters * 16, num_filters * 4, 0.5)
         self.dec2 = self.decoder_block(num_filters * 8, num_filters*2)
         self.dec1 = nn.Sequential(
             nn.ConvTranspose2d(num_filters * 4, out_channels, kernel_size=4, stride=2, padding=1),
@@ -40,14 +40,14 @@ class UNetGenerator(nn.Module):
         layers.append(nn.LeakyReLU(0.2, inplace=True))
         return nn.Sequential(*layers)
 
-    def decoder_block(self, in_channels, out_channels, kernel_size=4, stride=2, padding=1, dropout_prob=None):
+    def decoder_block(self, in_channels, out_channels, kernel_size=4, stride=2, padding=1, dropout_rate=None):
         layers = [
             nn.ConvTranspose2d(in_channels, out_channels, kernel_size, stride, padding, bias=False),
             nn.InstanceNorm2d(out_channels),
             nn.LeakyReLU(0.2, inplace=True)
         ]
-        if dropout_prob is not None:
-            layers.append(nn.Dropout(dropout_prob))
+        if dropout_rate is not None:
+            layers.append(nn.Dropout(dropout_rate))
         return nn.Sequential(*layers)
 
     def forward(self, x):
@@ -66,28 +66,6 @@ class UNetGenerator(nn.Module):
 
         out = F.interpolate(out, size=(140, 250))
         return out
-
-class PatchGANDiscriminator(nn.Module):
-    def __init__(self, in_channels=6, num_filters=128):
-        super(PatchGANDiscriminator, self).__init__()
-
-        self.model = nn.Sequential(
-            self.disc_block(in_channels, num_filters, normalize=False),
-            self.disc_block(num_filters, num_filters * 2),
-            self.disc_block(num_filters * 2, num_filters * 4),
-            self.disc_block(num_filters * 4, num_filters * 8, stride=1),
-            nn.Conv2d(num_filters * 8, 1, kernel_size=3, padding=1)
-        )
-
-    def disc_block(self, in_channels, out_channels, kernel_size=4, stride=2, padding=1, normalize=True):
-        layers = [nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding)]
-        if normalize:
-            layers.append(nn.InstanceNorm2d(out_channels))
-        layers.append(nn.LeakyReLU(0.2, inplace=True))
-        return nn.Sequential(*layers)
-
-    def forward(self, x):
-        return self.model(x)
 
 class PatchGANDiscriminator(nn.Module):
     def __init__(self, in_channels=6, num_filters=128):
