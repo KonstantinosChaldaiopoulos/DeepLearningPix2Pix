@@ -3,8 +3,7 @@ from models import *
 from utils import *
 import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib.pyplot as plt
-import numpy as np
+
 def train_pix2pix(paired_loader, epochs, lambda_L1=100):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
