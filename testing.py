@@ -8,7 +8,6 @@ from scipy.ndimage import gaussian_filter
 
 def compute_NSS(pred_map, gt_map):
     gt_map = resize(gt_map, pred_map.shape)
-    pred_map = gaussian_filter(pred_map, sigma=5)
     pred_map = (pred_map - np.mean(pred_map)) / np.std(pred_map)
     gt_map = (gt_map > 0.5).astype(int)
     NSS_score = np.mean(pred_map[gt_map == 1])
