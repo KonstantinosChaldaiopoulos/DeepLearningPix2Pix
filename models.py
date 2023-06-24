@@ -25,8 +25,8 @@ class UNetGenerator(nn.Module):
             nn.Dropout(0.5)
         )
 
-        self.dec4 = self.decoder_block(num_filters * 32, num_filters * 8, 0.5)
-        self.dec3 = self.decoder_block(num_filters * 16, num_filters * 4, 0.5)
+        self.dec4 = self.decoder_block(num_filters * 32, num_filters * 8, dropout_rate=0.5)
+        self.dec3 = self.decoder_block(num_filters * 16, num_filters * 4, dropout_rate=0.5)
         self.dec2 = self.decoder_block(num_filters * 8, num_filters*2)
         self.dec1 = nn.Sequential(
             nn.ConvTranspose2d(num_filters * 4, out_channels, kernel_size=4, stride=2, padding=1),
