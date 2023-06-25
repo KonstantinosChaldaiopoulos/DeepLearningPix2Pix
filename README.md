@@ -1,6 +1,7 @@
 # Pix2Pix GAN for Saliency Detection: An Investigation into Fixation Prediction.   
 A deep learning project for the MSc program in Democritus utilizing a pix2pix generative adversarial network and salient maps for fixation prediction.
 
+A thorough report can be found in [Report.pdf](https://github.com/KonstantinosChaldaiopoulos/DeepLearningPix2Pix/blob/main/Report.pdf)
 ## Repository Structure
 Here are the main files in the repository and a brief explanation of their function:
 
