@@ -36,6 +36,7 @@ Before running the scripts, make sure to install the necessary Python packages l
 
 If you run the code in google colab simply follow the instructions in the [presentation.ipynb](https://github.com/KonstantinosChaldaiopoulos/DeepLearningPix2Pix/blob/main/Presentation.ipynb) file.
 
+If you want to run the testing file without training the model, you can download the pretrained generator model from this [link](https://www.dropbox.com/s/vfbrrswwalfay6h/generator_99.rar?dl=0).
 # Results
 
 ## Visual Results
