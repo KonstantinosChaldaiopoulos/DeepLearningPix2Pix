@@ -47,9 +47,7 @@ If you want to run the testing file without training the model, you can download
 
 ![Καταγραφή3](https://github.com/KonstantinosChaldaiopoulos/DeepLearningPix2Pix/assets/102811531/7617c7d7-7e47-4484-938d-de200c5a085d)
 
-## Metrics Results
 
-The model performance was evaluated using the Normalized Scanpath Saliency (NSS) score, a standard measure in the field of visual attention. Our model achieved a promising NSS score of 1.43, which is close to the minimum human baseline of 1.54, signifying a good correlation between the predicted saliency map and the human fixation data. However, it is noteworthy that certain model architectures, such as [CEDNS](https://ieeexplore.ieee.org/document/8709735) , have achieved higher accuracies of 2.39 on the CAT2000 dataset. 
 
 
 # Author
